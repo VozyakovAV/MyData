@@ -1,0 +1,19 @@
+﻿@using MyData.Models
+@model MemoryMenuVM
+
+<ul class="nav navmenu-nav">
+
+    @foreach (var folder in @Model.Folders)
+    {
+        <li>@Html.RouteLink(folder.Name, new { controller = "Set", action = "Index", folderID = folder.Id })</li>
+    }
+
+    <li>@Html.ActionLink("Все папки", "Index", "Folder")</li>
+
+    <li class="nav-divider"></li>
+
+    <li>@Html.RouteLink("Plan", new { area = "plan", controller = "plan" })</li>
+
+    <li>@Html.ActionLink("Выйти", "Logout", "Account")</li>
+
+</ul>

@@ -1,0 +1,11 @@
+﻿@using MyData.Models
+@model SetsVM
+@{
+    ViewBag.Title = "Папка " + Model.Folder.Name;
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>@Html.ActionLink("Создать набор", "CreateSet", "Set", new { FolderID = Model.Folder.Id }, new { @class = "dialog-create" })</p>
+
+@{Html.RenderPartial("_Table", new TableVM(Model.Sets));}

@@ -1,0 +1,21 @@
+﻿@using Domain
+@model MyData.Models.TermEditVM
+<div>
+    @using (Html.BeginForm())
+    {
+        <div>
+            @Html.LabelFor(x => x.Question)
+            <p>@Html.TextAreaFor(x => x.Question, new { @class = "form-control", autofocus = "" })</p>
+        </div>
+
+        <div>
+            @Html.LabelFor(x => x.Answer)
+            <p>@Html.TextAreaFor(x => x.Answer, new { @class = "form-control", autofocus = "" })</p>
+        </div>
+
+        <div>
+            @Html.LabelFor(x => x.SetID)
+            <p>@Html.DropDownListFor(x => x.SetID, Model.Sets, null, new { @class = "form-control" })</p>
+        </div>
+    }
+</div>

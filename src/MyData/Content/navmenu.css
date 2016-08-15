@@ -1,0 +1,105 @@
+﻿.btnMainMenu{
+    float: right;
+    display: inline-block !important;
+    margin: 8px 15px;
+}
+.btnSubMenu {
+    float: left;
+    margin: 8px 15px;
+}
+
+html, body {
+  height: 100%;
+}
+body {
+  padding: 50px 0 0 0;
+}
+
+.nav > li {
+    padding-left: 0px;
+}
+
+.nav>li>a:hover {
+    background-color: lightblue !important;
+}
+
+.nav>li>a {
+    color: #337ab7 !important;
+}
+
+.navmenu {
+  padding-top: 50px;
+}
+
+.navbar {
+  display: block;
+  text-align: center;
+}
+.navbar-brand {
+  display: inline-block;
+  float: none;
+}
+.navbar-toggle {
+  position: absolute;
+  float: left;
+  margin-left: 15px;
+}
+
+.container {
+  max-width: 100%;
+}
+
+@media (min-width: 1px) {
+  .navbar-toggle {
+    display: block !important;
+  }
+}
+
+@media (min-width: 992px) {
+  body {
+    padding: 0 0 0 300px;
+  }
+  .navmenu {
+    padding-top: 0;
+  }
+  /*.navbar {
+    display: none !important;
+  }*/
+}
+
+
+.nav li > a {
+  padding-left: 15px;
+}
+
+.nav ul > li > a {
+  padding-left: 30px !important;
+}
+
+.nav ul ul > li > a {
+  padding-left: 45px !important;
+}
+
+.nav ul ul ul > li > a {
+  padding-left: 60px !important;
+}
+
+.nav ul ul ul ul > li > a {
+  padding-left: 75px !important;
+}
+
+.nav ul ul ul ul ul > li > a {
+  padding-left: 90px !important;
+}
+
+.nav a {
+  cursor: pointer;
+}
+
+/*.nav li {
+  border-top: 1px solid #e7e7e7;
+}
+
+.navigation {
+  border-bottom: 1px solid #e7e7e7;
+}*/

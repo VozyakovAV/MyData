@@ -1,0 +1,11 @@
+﻿@model MyData.Models.TaskRowVM
+
+<tr class="row taskRow" data-status="@Model.Status">
+    <td class="tdName">@Model.Name</td>
+    <td class="tdDeadline">@Model.Deadline</td>
+    <td class="tdProjectName">@Model.ProjectName</td> 
+    <td class="tdIterationName">@Model.IterationName</td>
+    <td>@Html.ActionLink("Comlete", "ComleteTask", "Tasks", new { }, new { @class = "dialog-confirm", data_id = Model.Id })</td>
+    <td>@Html.ActionLink("Del", "DeleteTask", "Tasks", new { }, new { @class = "dialog-delete", data_id = Model.Id })</td>
+    <td>@Html.ActionLink("Edit", "EditTask", "Tasks", new { }, new { @class = "dialog-edit", data_id = Model.Id })</td>
+</tr>

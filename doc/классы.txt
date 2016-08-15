@@ -1,0 +1,5 @@
+/Models
+  IterationsVM - для вывода списка итераций (Все итерации)
+  IterationRowVM - строка одной итерации в таблице 
+  IterationVM - страница одной итерации
+  IterationEditVM - редактирование итерации

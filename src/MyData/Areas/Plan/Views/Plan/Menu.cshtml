@@ -1,0 +1,44 @@
+﻿@using Domain
+@using MyData.Models
+@model MenuVM
+
+<ul class="nav navmenu-nav">
+
+    @foreach (var item in @Model.Iterations)
+    {
+        <li>@Html.RouteLink(item.Name, "RouteIteration", new { id = item.Id })</li>
+    }
+
+    <li>@Html.RouteLink("Все итерации", "RouteIterations")</li>
+
+    <li class="nav-divider"></li>
+
+
+    @helper ProjectItem(CProject project)
+    {
+        @Html.RouteLink(project.Name, "RouteProject", new { id = project.Id })
+        if (project.Projects.Count > 0)
+        {
+            <ul class="nav">
+                @foreach (var pr in project.Projects)
+                {
+                    <li>@ProjectItem(pr)</li>
+                }
+            </ul>
+        }
+    }
+
+    @foreach (var item in @Model.Projects)
+    {
+        <li>@ProjectItem(item)</li>
+    }
+
+    <li>@Html.RouteLink("Все проекты", "RouteProjects")</li>
+
+    <li class="nav-divider"></li>
+
+    <li>@Html.RouteLink("Memory", new { area = "memory", controller = "folder"} )</li>
+
+    <li>@Html.ActionLink("Выйти", "Logout", "Account")</li>
+
+</ul>

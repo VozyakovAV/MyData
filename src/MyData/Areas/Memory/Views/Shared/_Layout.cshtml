@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    @RenderSection("css", false)
+    <style>
+        .panel-left {
+        }
+
+        .panel-right {
+        }
+
+        .pnl-menu {
+            background-color: gainsboro;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navmenu navmenu-default navmenu-fixed-left offcanvas-sm">
+        @Html.RouteLink("Memory", new { area = "memory", controller = "folder" }, new { @class = "navmenu-brand visible-md visible-lg" })
+        @Html.Action("Menu", "Memory")
+    </div>
+
+    <div class="navbar navbar-default navbar-fixed-top hidden-md hidden-lg">
+        <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target=".navmenu">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        @Html.RouteLink("Memory", new { area = "memory", controller = "folder" }, new { @class = "navbar-brand" })
+    </div>
+
+    <div class="content">
+        @RenderBody()
+    </div>
+
+    <div class="modal fade" id="asModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    <p>One fine body&hellip;</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">ОК</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/as")
+    @Scripts.Render("~/bundles/jasny")
+
+    <script type="text/javascript">
+        $(function () {
+            as.sys2.init();
+        });
+    </script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

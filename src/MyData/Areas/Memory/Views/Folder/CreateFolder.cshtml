@@ -1,0 +1,11 @@
+﻿@using Domain
+@model MyData.Models.FolderEditVM
+<div>
+    @using (Html.BeginForm())
+    {
+        <div>
+            @Html.LabelFor(x => x.Name)
+            <p>@Html.TextBoxFor(x => x.Name, new { @class = "form-control", autofocus = "" })</p>
+        </div>
+    }
+</div>

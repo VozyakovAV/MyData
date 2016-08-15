@@ -1,0 +1,29 @@
+﻿@model MyData.Models.LoginVM
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutEmpty.cshtml";
+}
+
+<div class="panel">
+    <div class="page-heading">
+        <h3>Вход в систему</h3>
+    </div>
+    <div class="panel-body">
+        
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary()
+            <div class="form-group">
+                <label>Имя:</label>
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Пароль:</label>
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            </div>
+            <input type="submit" value="Войти" class="btn btn-primary" />
+        }
+    </div>
+</div>
+

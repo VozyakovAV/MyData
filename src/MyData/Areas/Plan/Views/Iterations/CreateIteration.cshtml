@@ -1,0 +1,17 @@
+﻿@using Domain
+@model MyData.Models.IterationEditVM
+<div>
+    @using (Html.BeginForm())
+    {
+        <div>
+            @Html.LabelFor(x => x.Iteration.DateStart)
+            <p>@Html.TextBoxFor(x => x.Iteration.DateStart, new { Name = "datestart", @class = "form-control",
+                @type = "date", @Value = Model.Iteration.DateStart.ToString("yyyy-MM-dd") })</p>
+        </div>
+
+        <div>
+            @Html.LabelFor(x => x.Iteration.Status)
+            <p>@Html.DropDownListFor(x => x.Iteration.Status, EnumHelper.GetSelectList(typeof(CIterationStatus)), null, new { Name = "status", @class = "form-control" })</p>
+        </div>
+    }
+</div>

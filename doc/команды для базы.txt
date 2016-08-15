@@ -1,0 +1,14 @@
+¬ключить миграцию
+Enable-Migrations -ProjectName Domain
+
+откатить в ноль
+Update-Database -TargetMigration:0
+
+обновить базу
+Update-Database
+Update-Database -ProjectName Domain
+
+—оздать скрипт обновлени€
+add-migration <название> -ProjectName Domain
+
+-ProjectName - можно не использовать

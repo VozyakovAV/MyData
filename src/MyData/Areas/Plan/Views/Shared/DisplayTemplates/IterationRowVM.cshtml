@@ -1,0 +1,7 @@
+﻿@model MyData.Models.IterationRowVM
+
+<tr class="row" data-status="@Model.Status">
+    <td>@Html.ActionLink(@Model.Name, "Iteration", new { id = Model.Id })</td>
+    <td>@Html.ActionLink("Del", "DeleteIteration", "Iterations", new { }, new { @class = "dialog-delete", data_id = Model.Id })</td>
+    <td>@Html.ActionLink("Edit", "EditIteration", "Iterations", new { }, new { @class = "dialog-edit", data_id = Model.Id })</td>
+</tr>

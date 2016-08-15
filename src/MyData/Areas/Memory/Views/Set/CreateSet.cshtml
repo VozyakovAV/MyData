@@ -1,0 +1,16 @@
+﻿@using Domain
+@model MyData.Models.SetEditVM
+<div>
+    @using (Html.BeginForm())
+    {
+        <div>
+            @Html.LabelFor(x => x.Name)
+            <p>@Html.TextBoxFor(x => x.Name, new { @class = "form-control", autofocus = "" })</p>
+        </div>
+
+        <div>
+            @Html.LabelFor(x => x.FolderID)
+            <p>@Html.DropDownListFor(x => x.FolderID, Model.Folders, null, new { @class = "form-control" })</p>
+        </div>
+    }
+</div>

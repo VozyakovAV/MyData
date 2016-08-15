@@ -1,0 +1,12 @@
+﻿@using Domain
+@model MyData.Models.FolderEditVM
+<div>
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(x => x.Id)
+        <div>
+            @Html.LabelFor(x => x.Name)
+            <p>@Html.TextBoxFor(x => x.Name, new { @class = "form-control" })</p>
+        </div>
+    }
+</div>

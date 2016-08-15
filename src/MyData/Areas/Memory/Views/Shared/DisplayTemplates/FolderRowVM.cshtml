@@ -1,0 +1,7 @@
+﻿@model MyData.Models.FolderRowVM
+
+<tr class="row">
+    <td>@Html.ActionLink(@Model.Name, "Index", "Set", new { setID = @Model.Id }, null)</td>
+    <td>@Html.ActionLink("Del", "DeleteFolder", "Folder", new { }, new { @class = "dialog-delete", data_id = Model.Id })</td>
+    <td>@Html.ActionLink("Edit", "EditFolder", "Folder", new { }, new { @class = "dialog-edit", data_id = Model.Id })</td>
+</tr>

@@ -1,0 +1,13 @@
+﻿@model MyData.Models.TableVM
+
+@if (Model.Items.Count() > 0)
+{
+    if (!string.IsNullOrEmpty(Model.Title))
+    {
+        <strong>@Model.Title</strong>
+    }
+
+    <table class="table table-striped table-hover @Model.Classes">
+        @Html.DisplayFor(x => x.Items)
+    </table>
+}

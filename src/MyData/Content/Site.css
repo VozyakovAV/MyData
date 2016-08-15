@@ -1,0 +1,59 @@
+﻿body {
+    /*padding-top: 50px;
+    padding-bottom: 20px;*/
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    /*padding-left: 15px;
+    padding-right: 15px;*/
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    /*white-space: normal;*/
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+tr[data-status="Completed"] *,
+tr[data-status="Closed"] * {
+    text-decoration: line-through !important;
+    color: gray !important;
+}
+tr[data-status="Canceled"] * {
+    color: red !important;
+}
+.modal-dialog button {
+    min-width: 80px;
+}
+
+.content {
+    padding: 10px 20px;
+}
+
+.tasksInIteration .tdIterationName { display:none;}
+.tasksInProject .tdProjectName { display:none;}
+
+.modal-dialog .form-control {
+    min-width: 100%;
+}
+
+/*.modal-dialog textarea {
+    height: 155px;
+}*/
+
+table pre {
+    border: none;
+    background: none;
+    font-size: 1em;
+    padding: 0px;
+    margin: 0px;
+}

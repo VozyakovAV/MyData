@@ -1,0 +1,11 @@
+﻿@using MyData.Models
+@model TermsVM
+@{
+    ViewBag.Title = @Model.SetName;
+}
+
+<h2>@Model.SetName</h2>
+
+<p>@Html.ActionLink("Создать вопрос", "CreateTerm", "Term", new { SetID = Model.SetID }, new { @class = "dialog-create" })</p>
+
+@{Html.RenderPartial("_Table", new TableVM(Model.Terms));}

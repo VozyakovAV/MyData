@@ -1,0 +1,17 @@
+﻿@using MyData.Models
+@model IterationVM
+@{
+    ViewBag.Title = Model.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Name</h2>
+
+@{Html.RenderPartial("_Table", new TableVM("Задачи", Model.OpenTasks, "tasksInIteration"));}
+
+<div class="checkbox">
+    <label><input type="checkbox" value="" data-toggle="collapse" data-target="#closedTasks">Показать закрытые задачи</label>
+</div>
+<div id="closedTasks" class="collapse">
+    @{Html.RenderPartial("_Table", new TableVM("Закрытые задачи", Model.ClosedTasks, "tasksInIteration"));}
+</div>

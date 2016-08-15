@@ -1,0 +1,11 @@
+﻿@using MyData.Models
+@model FoldersVM
+@{
+    ViewBag.Title = "Папки";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>@Html.ActionLink("Создать папку", "CreateFolder", "Folder", new { }, new { @class = "dialog-create" })</p>
+
+@{Html.RenderPartial("_Table", new TableVM(Model.Folders));}

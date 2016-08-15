@@ -1,0 +1,32 @@
+﻿@using Domain
+@model MyData.Models.ProjectEditVM
+<div>
+    @using (Html.BeginForm())
+    {
+        <div>
+            @Html.LabelFor(x => x.Project.Name)
+            <p>@Html.TextBoxFor(x => x.Project.Name, new { Name = "name", @class = "form-control", autofocus = ""})</p>
+        </div>
+
+        <div>
+            @Html.LabelFor(x => x.Project.Description)
+            <p>@Html.TextAreaFor(x => x.Project.Description, new { Name = "description", @class = "form-control" })</p>
+        </div>
+
+        <div>
+            @Html.LabelFor(x => x.Project.Parent)
+            <p>@Html.DropDownListFor(x => x.Project.ParentID, Model.Projects, string.Empty, new { Name = "parentID", @class = "form-control" })</p>
+        </div>
+
+        <div>
+            @Html.LabelFor(x => x.Project.Deadline)
+            <p>@Html.TextBoxFor(x => x.Project.Deadline, new { Name = "deadline", @class = "form-control",
+                @type = "date", @Value = Model.Project.Deadline.HasValue ? Model.Project.Deadline.Value.ToString("yyyy-MM-dd") : null })</p>
+        </div>
+
+        <div>
+            @Html.LabelFor(x => x.Project.Status)
+            <p>@Html.DropDownListFor(x => x.Project.Status, EnumHelper.GetSelectList(typeof(CProjectStatus)), null, new { Name = "status", @class = "form-control" })</p>
+        </div>
+    }
+</div>

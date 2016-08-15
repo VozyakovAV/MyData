@@ -1,0 +1,7 @@
+﻿@model MyData.Models.SetRowVM
+
+<tr class="row">
+    <td>@Html.ActionLink(@Model.Name, "Index", "Term", new { setID = @Model.Id }, null)</td>
+    <td>@Html.ActionLink("Del", "DeleteSet", "Set", new { }, new { @class = "dialog-delete", data_id = Model.Id })</td>
+    <td>@Html.ActionLink("Edit", "EditSet", "Set", new { }, new { @class = "dialog-edit", data_id = Model.Id })</td>
+</tr>

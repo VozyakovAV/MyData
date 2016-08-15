@@ -1,0 +1,68 @@
+﻿@using MyData.Models
+@model ProjectsVM
+@{
+    ViewBag.Title = "Проекты";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section css {
+    <link href="~/Content/TreeGrid/jquery.treegrid.css" rel="stylesheet" />
+    <style>
+        table {
+            width: 100%;
+        }
+        .table-td-child {
+            padding-left: 20px;
+        }
+        .table-td-right {
+            text-align: right;
+        }
+        tr {
+            border-bottom: 1px solid gray;
+        }
+        td {
+            padding: 4px;
+        }
+        .tree .glyphicon {
+            font-size: 10px;
+        }
+    </style>
+}
+
+<h2>Проекты</h2>
+
+<p>@Html.ActionLink("Создать проект", "CreateProject", "Projects", new { }, new { @class = "dialog-create" })</p>
+
+@helper RenderProject(ProjectWithTreeVM project)
+{
+    var classNum = "treegrid-" + project.Number;
+    var classParentNum = project.ParentNumber > 0 ? "treegrid-parent-" + project.ParentNumber : "";
+
+    <tr class="@classNum @classParentNum" data-status="@project.Project.Status">
+        <td>@Html.RouteLink(@project.Project.Name, "RouteProject", new { id = @project.Project.Id })</td>
+        <td class="table-td-right">
+            @Html.ActionLink("Del", "DeleteProject", "Projects", new { }, new { @class = "dialog-delete", data_id = project.Project.Id })
+            @Html.ActionLink("Edit", "EditProject", "Projects", new { }, new { @class = "dialog-edit", data_id = project.Project.Id })
+        </td>
+    </tr>
+}
+
+<table class="table tree table-striped table-hover">
+    @foreach (var project in Model.Projects)
+    {
+        @RenderProject(project)
+    }
+</table>	
+
+@section scripts {
+<script src="~/Content/TreeGrid/jquery.treegrid.js"></script>
+
+<script type="text/javascript">
+
+    $(function () {
+        $('.tree').treegrid({
+            expanderExpandedClass: 'glyphicon glyphicon-chevron-down',
+            expanderCollapsedClass: 'glyphicon glyphicon-chevron-up'
+        });
+    });
+</script>
+}

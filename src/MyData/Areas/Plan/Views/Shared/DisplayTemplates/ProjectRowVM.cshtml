@@ -1,0 +1,6 @@
+﻿@model MyData.Models.ProjectRowVM
+
+<tr class="row" data-status="@Model.Status">
+    <td>@Html.ActionLink(@Model.Name, "Project", new { id = @Model.Id })</td>
+    <td>@Model.Deadline</td>
+</tr>

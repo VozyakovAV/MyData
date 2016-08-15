@@ -1,0 +1,22 @@
+﻿@using MyData.Models
+@model ProjectVM
+@{
+    ViewBag.Title = Model.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Name</h2>
+
+<p>@Html.ActionLink("Добавить задачу", "CreateTask", "Tasks", new { projectID = Model.Id }, new { @class = "dialog-create" })</p>
+
+@{Html.RenderPartial("_Table", new TableVM("Задачи", Model.OpenTasks, "tasksInProject"));}
+
+@{Html.RenderPartial("_Table", new TableVM("Подпроекты", Model.SubProjects));}
+
+<div class="checkbox">
+    <label><input type="checkbox" value="" data-toggle="collapse" data-target="#closedTasks">Показать закрытые задачи</label>
+</div>
+<div id="closedTasks" class="collapse">
+    @{Html.RenderPartial("_Table", new TableVM(Model.ClosedTasks, "tasksInProject"));}
+</div>
+

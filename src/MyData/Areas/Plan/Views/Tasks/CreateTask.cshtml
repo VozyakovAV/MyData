@@ -1,0 +1,37 @@
+﻿@using Domain
+@model MyData.Models.TaskEditVM
+<div>
+    @using (Html.BeginForm())
+    {
+        <div>
+            @Html.LabelFor(x => x.Task.Name)
+            <p>@Html.TextBoxFor(x => x.Task.Name, new { Name = "name", @class = "form-control", autofocus = ""})</p>
+        </div>
+
+        <div>
+            @Html.LabelFor(x => x.Task.Description)
+            <p>@Html.TextAreaFor(x => x.Task.Description, new { Name = "description", @class = "form-control" })</p>
+        </div>
+
+        <div>
+            @Html.LabelFor(x => x.Task.Deadline)
+            <p>@Html.TextBoxFor(x => x.Task.Deadline, new { Name = "deadline", @class = "form-control",
+                @type = "date", @Value = Model.Task.Deadline.HasValue ? Model.Task.Deadline.Value.ToString("yyyy-MM-dd") : null })</p>
+        </div>
+
+        <div>
+            @Html.LabelFor(x => x.Task.Status)
+            <p>@Html.DropDownListFor(x => x.Task.Status, EnumHelper.GetSelectList(typeof(CTaskStatus)), null, new { Name = "status", @class = "form-control" })</p>
+        </div>
+
+        <div>
+            @Html.LabelFor(x => x.Task.Project)
+            <p>@Html.DropDownListFor(x => x.Task.ProjectID, Model.Projects, null, new { Name = "projectID", @class = "form-control" })</p>
+        </div>
+
+        <div>
+            @Html.LabelFor(x => x.Task.Iteration)
+            <p>@Html.DropDownListFor(x => x.Task.IterationID, Model.Iterations, "Не выбрано", new { Name = "iterationID", @class = "form-control" })</p>
+        </div>
+    }
+</div>
