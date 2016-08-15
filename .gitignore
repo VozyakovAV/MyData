@@ -8,3 +8,4 @@ src/MyData.Tests/obj/
 src/MyData/bin/
 src/MyData/obj/
 src/packages/
+src/MyData/Web.config
