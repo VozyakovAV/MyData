@@ -1,5 +1,6 @@
 ﻿using Domain.Memory;
 using MyData.Infrastructure;
+using MyData.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace MyData.Areas.Memory.Controllers
             return View(vm);
         }
 
-        public ActionResult CreateQuestion(int setID = 0)
+        public ActionResult CreateTerm(int setID = 0)
         {
             var vm = mng.Memory.CreateTermEditVM(setID);
             return PartialView(vm);
@@ -56,6 +57,31 @@ namespace MyData.Areas.Memory.Controllers
             var term = mng.Memory.GetTerm(id);
             var res = mng.Memory.Delete(term);
             return Json(res);
+        }
+
+        public ActionResult Import(int setID = 0)
+        {
+            var vm = mng.Memory.CreateImportVM(setID);
+            if (vm == null)
+                return HttpNotFound();
+            return View(vm);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult Import(ImportVM vm)
+        {
+            var result = mng.ImportExportTerms.ImportTerms(vm.SetID, vm.Text, vm.WordDelimeter, vm.RowDelimeter);
+            return RedirectToRoute("RouteSet", new { setID = vm.SetID });
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public JsonResult DoImport(string text, string wordDelimeter, string rowDelimeter)
+        {
+            var terms = mng.ImportExportTerms.ParseTerms(text, wordDelimeter, rowDelimeter);
+            return Json(new
+            {
+                result = terms
+            });
         }
     }
 }

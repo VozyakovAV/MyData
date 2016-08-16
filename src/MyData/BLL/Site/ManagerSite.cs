@@ -23,6 +23,9 @@ namespace MyData.BLL.Site
         private MapsiteMaster _mapsite = null;
         public MapsiteMaster MapSite { get { return Get<MapsiteMaster>(_mapsite, this); } }
 
+        private ImportExportTermsManager _importExportTerms = null;
+        public ImportExportTermsManager ImportExportTerms { get { return Get<ImportExportTermsManager>(_importExportTerms, this); } }
+
         private UnitOfWork _uow;
 
         public void SaveDataBase()

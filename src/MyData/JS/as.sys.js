@@ -78,4 +78,10 @@ as.sys = {
             as.sys.ajaxSend("/Plan/jsError", { s: str }, function () { });
         }, as.sys.jsErrorPeriod);
     },
+    htmlEncode(value) {
+        return $('<div/>').text(value).html();
+    },
+    htmlDecode(value) {
+        return $('<div/>').html(value).text();
+    }
 };

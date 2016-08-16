@@ -1,0 +1,73 @@
+﻿@using MyData.Models
+@model ImportVM
+@{
+    ViewBag.Title = "Импорт";
+}
+
+@section css {
+    <style>
+        .txtText { min-width: 100%; min-height: 200px; }
+        .result { margin: 10px 5px; }
+    </style>
+}
+
+<h2>Импорт в '@Model.SetName'</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <div class="col-sm-5">
+            @Html.LabelFor(x => x.WordDelimeter)
+            @Html.TextBoxFor(x => x.WordDelimeter, new { @class = "txtParam wordDelimeter form-control" })
+        </div>
+        <div class="col-sm-5">
+            @Html.LabelFor(x => x.RowDelimeter)
+            @Html.TextBoxFor(x => x.RowDelimeter, new { @class = "txtParam rowDelimeter form-control" })
+        </div>
+        <div class="col-sm-2">
+            <input type="submit" value="Импорт" class="btn btn-primary" />
+        </div>
+    </div>
+    <br />
+    @Html.TextAreaFor(x => x.Text, new { @class = "txtText txtParam form-control" })
+}
+
+<div class="result row"></div>
+
+@section scripts {
+<script type="text/javascript">
+    $(function () {
+        DoImport();
+        $('.txtParam').on('input', function (e) {
+            DoImport();
+        });
+        function DoImport() {
+            var text = $(".txtText").val();
+            var wordDelimeter = $(".wordDelimeter").val();
+            var rowDelimeter = $(".rowDelimeter").val();
+            var url = "@Url.Action("DoImport")";
+            var params = { text: text, wordDelimeter: wordDelimeter, rowDelimeter: rowDelimeter };
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: params,
+                success: function (data) {
+                    $(".result").empty();
+
+                    if (data.result) {
+                        var s = [];
+                        $.each(data.result, function (i, term) {
+                            s.push("<div class='col-xs-6'><pre>" + as.sys.htmlEncode(term.Question) + "</pre></div>");
+                            s.push("<div class='col-xs-6'><pre class='col-xs-6'>" + as.sys.htmlEncode(term.Answer) + "</pre></div>");
+                        });
+                        $(".result").append(s.join(""));
+                    }
+                }
+            });
+        }
+
+        
+    });
+</script>
+}

@@ -137,6 +137,7 @@
     <Compile Include="Areas\Memory\Controllers\TermController.cs" />
     <Compile Include="Areas\Memory\Controllers\SetController.cs" />
     <Compile Include="Areas\Memory\MemoryAreaRegistration.cs" />
+    <Compile Include="Areas\Memory\Models\ImportVM.cs" />
     <Compile Include="Areas\Memory\Models\MemoryMenuVM.cs" />
     <Compile Include="Areas\Memory\Models\TermEditVM.cs" />
     <Compile Include="Areas\Memory\Models\FolderEditVM.cs" />
@@ -151,6 +152,7 @@
     <Compile Include="BLL\RDL\Debug.cs" />
     <Compile Include="BLL\Site\Base\BaseManager.cs" />
     <Compile Include="BLL\Site\Base\Collection.cs" />
+    <Compile Include="BLL\Site\ImportManager.cs" />
     <Compile Include="BLL\Site\ManagerSite.cs" />
     <Compile Include="BLL\Site\IterationManager.cs" />
     <Compile Include="BLL\Site\MapsiteMaster.cs" />
@@ -225,6 +227,7 @@
     <Content Include="Areas\Plan\Views\Shared\DisplayTemplates\IterationRowVM.cshtml" />
     <Content Include="Areas\Plan\Views\Shared\DisplayTemplates\ProjectRowVM.cshtml" />
     <Content Include="Areas\Plan\Views\Shared\DisplayTemplates\TaskRowVM.cshtml" />
+    <Content Include="Areas\Memory\Views\Term\Import.cshtml" />
     <None Include="Properties\PublishProfiles\masterhost.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />

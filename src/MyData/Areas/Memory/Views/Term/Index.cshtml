@@ -6,6 +6,9 @@
 
 <h2>@Model.SetName</h2>
 
-<p>@Html.ActionLink("Создать вопрос", "CreateTerm", "Term", new { SetID = Model.SetID }, new { @class = "dialog-create" })</p>
+<p>
+    @Html.ActionLink("Создать вопрос", "CreateTerm", "Term", new { SetID = Model.SetID }, new { @class = "dialog-create" }) |
+    @Html.ActionLink("Импорт", "Import", "Term", new { SetID = Model.SetID }, null)
+</p>
 
 @{Html.RenderPartial("_Table", new TableVM(Model.Terms));}

@@ -103,5 +103,21 @@ namespace MyData.BLL.Site
             res.Sets = new SelectList(sets, "Id", "Name", term.Set);
             return res;
         }
+
+        public ImportVM CreateImportVM(int setID)
+        {
+            var set = GetSet(setID);
+            if (set == null) return null;
+
+            var vm = new ImportVM()
+            {
+                SetID = set.Id,
+                SetName = set.Name,
+                WordDelimeter = " ---- ",
+                RowDelimeter = " ;;;; ",
+                Text = "1 ---- 2 ;;;; 3 ---- 4"
+            };
+            return vm;
+        }
     }
 }

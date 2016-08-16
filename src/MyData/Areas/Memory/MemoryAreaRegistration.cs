@@ -14,6 +14,8 @@ namespace MyData.Areas.Memory
 
         public override void RegisterArea(AreaRegistrationContext context) 
         {
+            context.MapRoute("RouteSet", "Memory/Term/Index/{setID}", new { controller = "Term", action = "Index" }, new { setID = "^\\d+$" });
+
             context.MapRoute(
                 "Memory_default",
                 "Memory/{controller}/{action}/{id}",
