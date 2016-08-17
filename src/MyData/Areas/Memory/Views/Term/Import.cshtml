@@ -7,7 +7,6 @@
 @section css {
     <style>
         .txtText { min-width: 100%; min-height: 200px; }
-        .result { margin: 10px 5px; }
     </style>
 }
 
@@ -31,8 +30,8 @@
     <br />
     @Html.TextAreaFor(x => x.Text, new { @class = "txtText txtParam form-control" })
 }
-
-<div class="result row"></div>
+<br />
+<div class="result"></div>
 
 @section scripts {
 <script type="text/javascript">
@@ -58,8 +57,10 @@
                     if (data.result) {
                         var s = [];
                         $.each(data.result, function (i, term) {
+                            s.push("<div class='row'>");
                             s.push("<div class='col-xs-6'><pre>" + as.sys.htmlEncode(term.Question) + "</pre></div>");
-                            s.push("<div class='col-xs-6'><pre class='col-xs-6'>" + as.sys.htmlEncode(term.Answer) + "</pre></div>");
+                            s.push("<div class='col-xs-6'><pre>" + as.sys.htmlEncode(term.Answer) + "</pre></div>");
+                            s.push("</div>");
                         });
                         $(".result").append(s.join(""));
                     }
