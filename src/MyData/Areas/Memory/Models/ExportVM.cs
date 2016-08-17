@@ -5,12 +5,11 @@ using System.Web;
 
 namespace MyData.Models
 {
-    public class ImportVM
+    public class ExportVM
     {
         public int SetID { get; set; }
         public string SetName { get; set; }
         public string WordDelimeter { get; set; }
         public string RowDelimeter { get; set; }
-        public string Text { get; set; }
     }
 }

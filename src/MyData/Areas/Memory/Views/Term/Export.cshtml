@@ -1,0 +1,65 @@
+﻿@using MyData.Models
+@model ExportVM
+@{
+    ViewBag.Title = "Экспорт";
+}
+
+@section css {
+    <style>
+        .result { min-width: 100%; min-height: 300px; }
+    </style>
+}
+
+<h2>Экспорт в '@Model.SetName'</h2>
+
+<div class="row">
+    <div class="col-sm-5">
+        @Html.LabelFor(x => x.WordDelimeter)
+        @Html.TextBoxFor(x => x.WordDelimeter, new { @class = "txtParam wordDelimeter form-control" })
+    </div>
+    <div class="col-sm-5">
+        @Html.LabelFor(x => x.RowDelimeter)
+        @Html.TextBoxFor(x => x.RowDelimeter, new { @class = "txtParam rowDelimeter form-control" })
+    </div>
+</div>
+<br />
+
+<a href="#" class="selectAllText">Select all</a>
+<textarea class="result form-control" readonly></textarea>
+
+@section scripts {
+    <script type="text/javascript">
+    $(function () {
+        DoExport();
+        $('.txtParam').on('input', function (e) {
+            DoExport();
+        });
+        $('.selectAllText').on('click', function(e) {
+            e.preventDefault();
+            $(".result").select();
+        });
+        function DoExport() {
+            var setID = @Model.SetID;
+            var wordDelimeter = $(".wordDelimeter").val();
+            var rowDelimeter = $(".rowDelimeter").val();
+            var url = "@Url.Action("DoExport")";
+            var params = { setID: setID, wordDelimeter: wordDelimeter, rowDelimeter: rowDelimeter };
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: params,
+                success: function (data) {
+                    $(".result").val("");
+
+                    if (data.result) {
+                        $(".result").val(data.result);
+                    }
+                }
+            });
+        }
+
+
+    });
+    </script>
+}

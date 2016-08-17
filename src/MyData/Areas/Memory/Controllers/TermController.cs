@@ -70,7 +70,7 @@ namespace MyData.Areas.Memory.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult Import(ImportVM vm)
         {
-            var result = mng.ImportExportTerms.ImportTerms(vm.SetID, vm.Text, vm.WordDelimeter, vm.RowDelimeter);
+            mng.ImportExportTerms.ImportTerms(vm.SetID, vm.Text, vm.WordDelimeter, vm.RowDelimeter);
             return RedirectToRoute("RouteSet", new { setID = vm.SetID });
         }
 
@@ -81,6 +81,24 @@ namespace MyData.Areas.Memory.Controllers
             return Json(new
             {
                 result = terms
+            });
+        }
+
+        public ActionResult Export(int setID = 0)
+        {
+            var vm = mng.Memory.CreateExportVM(setID);
+            if (vm == null)
+                return HttpNotFound();
+            return View(vm);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public JsonResult DoExport(int setID, string wordDelimeter, string rowDelimeter)
+        {
+            var text = mng.ImportExportTerms.ExportTerms(setID, wordDelimeter, rowDelimeter);
+            return Json(new
+            {
+                result = text
             });
         }
     }

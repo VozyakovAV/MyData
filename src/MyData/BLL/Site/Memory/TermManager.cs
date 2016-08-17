@@ -119,5 +119,20 @@ namespace MyData.BLL.Site
             };
             return vm;
         }
+
+        public ExportVM CreateExportVM(int setID)
+        {
+            var set = GetSet(setID);
+            if (set == null) return null;
+
+            var vm = new ExportVM()
+            {
+                SetID = set.Id,
+                SetName = set.Name,
+                WordDelimeter = " ---- ",
+                RowDelimeter = " ;;;; ",
+            };
+            return vm;
+        }
     }
 }

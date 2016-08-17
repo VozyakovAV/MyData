@@ -137,6 +137,7 @@
     <Compile Include="Areas\Memory\Controllers\TermController.cs" />
     <Compile Include="Areas\Memory\Controllers\SetController.cs" />
     <Compile Include="Areas\Memory\MemoryAreaRegistration.cs" />
+    <Compile Include="Areas\Memory\Models\ExportVM.cs" />
     <Compile Include="Areas\Memory\Models\ImportVM.cs" />
     <Compile Include="Areas\Memory\Models\MemoryMenuVM.cs" />
     <Compile Include="Areas\Memory\Models\TermEditVM.cs" />
@@ -228,6 +229,7 @@
     <Content Include="Areas\Plan\Views\Shared\DisplayTemplates\ProjectRowVM.cshtml" />
     <Content Include="Areas\Plan\Views\Shared\DisplayTemplates\TaskRowVM.cshtml" />
     <Content Include="Areas\Memory\Views\Term\Import.cshtml" />
+    <Content Include="Areas\Memory\Views\Term\Export.cshtml" />
     <None Include="Properties\PublishProfiles\masterhost.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 
 namespace MyData.BLL.Site
@@ -30,26 +31,31 @@ namespace MyData.BLL.Site
             return result;
         }
 
-        public bool ImportTerms(int setID, string text, string wordDelimeter, string rowDelimeter)
+        public void ImportTerms(int setID, string text, string wordDelimeter, string rowDelimeter)
         {
-            try
+            var terms = ParseTerms(text, wordDelimeter, rowDelimeter);
+            foreach (var term in terms)
             {
-                var terms = ParseTerms(text, wordDelimeter, rowDelimeter);
-                foreach (var term in terms)
-                {
-                    var newTerm = ManagerSite.Memory.NewTerm(term.Question);
-                    newTerm.SetID = setID;
-                    newTerm.Answer = term.Answer;
-                    ManagerSite.Memory.Save(newTerm, false);
-                }
-                ManagerSite.SaveDataBase();
-                return true;
+                var newTerm = ManagerSite.Memory.NewTerm(term.Question);
+                newTerm.SetID = setID;
+                newTerm.Answer = term.Answer;
+                ManagerSite.Memory.Save(newTerm, false);
             }
-            catch (Exception ex)
-            {
-                return false;
-            }
+            ManagerSite.SaveDataBase();
+        }
 
+        public string ExportTerms(int setID, string wordDelimeter, string rowDelimeter)
+        {
+            var terms = ManagerSite.Memory.GetTerms(setID);
+            var sb = new StringBuilder();
+            foreach(var term in terms)
+            {
+                sb.Append(term.Question);
+                sb.Append(wordDelimeter);
+                sb.Append(term.Answer);
+                sb.AppendLine(rowDelimeter);
+            }
+            return sb.ToString();
         }
 
         public class TermSimple
