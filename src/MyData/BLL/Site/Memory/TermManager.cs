@@ -48,16 +48,14 @@ namespace MyData.BLL.Site
 
         #endregion
 
-        public CTerm NewTerm(string question)
+        public CTerm NewTerm(string question, string answer)
         {
-            return new CTerm(question);
+            return new CTerm(question, answer);
         }
 
         public CTerm CreateTerm(CTerm termPattern)
         {
-            var term = NewTerm(termPattern.Question);
-            term.Question = termPattern.Question;
-            term.Answer = termPattern.Answer;
+            var term = NewTerm(termPattern.Question, termPattern.Answer);
             term.SetID = termPattern.SetID;
             Save(term);
             return term;
@@ -89,7 +87,7 @@ namespace MyData.BLL.Site
 
         public TermEditVM CreateTermEditVM(int setID = 0)
         {
-            var term = NewTerm("");
+            var term = NewTerm("", "");
             term.SetID = setID;
             return CreateTermEditVM(term);
         }

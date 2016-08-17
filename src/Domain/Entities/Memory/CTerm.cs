@@ -15,10 +15,10 @@ namespace Domain.Memory
         {
         }
 
-        public CTerm(string question) : this()
+        public CTerm(string question, string answer) : this()
         {
             this.Question = question;
-            this.Answer = "";
+            this.Answer = answer;
         }
 
         public override string ToString()

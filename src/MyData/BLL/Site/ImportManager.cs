@@ -36,9 +36,8 @@ namespace MyData.BLL.Site
             var terms = ParseTerms(text, wordDelimeter, rowDelimeter);
             foreach (var term in terms)
             {
-                var newTerm = ManagerSite.Memory.NewTerm(term.Question);
+                var newTerm = ManagerSite.Memory.NewTerm(term.Question, term.Answer);
                 newTerm.SetID = setID;
-                newTerm.Answer = term.Answer;
                 ManagerSite.Memory.Save(newTerm, false);
             }
             ManagerSite.SaveDataBase();

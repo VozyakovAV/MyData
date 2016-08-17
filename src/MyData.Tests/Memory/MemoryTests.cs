@@ -149,9 +149,9 @@ namespace MyData.Tests
 
         #region terms
 
-        public CTerm CreateTerm(string name = "Что такое термин?", CSet set = null)
+        public CTerm CreateTerm(string question = "термин?", string answer = "термин!", CSet set = null)
         {
-            var term = NewTerm();
+            var term = NewTerm(question, answer);
 
             if (set == null)
                 set = CreateSet();
@@ -161,9 +161,9 @@ namespace MyData.Tests
             return term;
         }
 
-        public CTerm NewTerm(string name = "Что такое термин?")
+        public CTerm NewTerm(string question = "термин?", string answer = "термин!")
         {
-            return mng.Memory.NewTerm(name);
+            return mng.Memory.NewTerm(question, answer);
         }
 
         public CTerm GetTerm(int id)
