@@ -133,6 +133,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Memory\Controllers\FolderController.cs" />
+    <Compile Include="Areas\Memory\Controllers\LernController.cs" />
     <Compile Include="Areas\Memory\Controllers\MemoryController.cs" />
     <Compile Include="Areas\Memory\Controllers\TermController.cs" />
     <Compile Include="Areas\Memory\Controllers\SetController.cs" />
@@ -193,6 +194,7 @@
     <Content Include="Content\jasny-bootstrap.css" />
     <Content Include="Content\jasny-bootstrap.min.css" />
     <Content Include="Content\navmenu.css" />
+    <Content Include="Content\Pages\Lern.css" />
     <Content Include="Content\TreeGrid\jquery.treegrid.css" />
     <Content Include="Content\TreeGrid\jquery.treegrid.js" />
     <Content Include="favicon.ico" />
@@ -230,6 +232,7 @@
     <Content Include="Areas\Plan\Views\Shared\DisplayTemplates\TaskRowVM.cshtml" />
     <Content Include="Areas\Memory\Views\Term\Import.cshtml" />
     <Content Include="Areas\Memory\Views\Term\Export.cshtml" />
+    <Content Include="Areas\Memory\Views\Lern\Index.cshtml" />
     <None Include="Properties\PublishProfiles\masterhost.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />

@@ -9,7 +9,8 @@
 <p>
     @Html.ActionLink("Создать вопрос", "CreateTerm", "Term", new { setID = Model.SetID }, new { @class = "dialog-create" }) |
     @Html.ActionLink("Импорт", "Import", "Term", new { setID = Model.SetID }, null) |
-    @Html.ActionLink("Экспорт", "Export", "Term", new { setID = Model.SetID }, null)
+    @Html.ActionLink("Экспорт", "Export", "Term", new { setID = Model.SetID }, null) |
+    @Html.ActionLink("Изучение", "Index", "Lern", new { setID = Model.SetID }, null)
 </p>
 
 @{Html.RenderPartial("_Table", new TableVM(Model.Terms));}

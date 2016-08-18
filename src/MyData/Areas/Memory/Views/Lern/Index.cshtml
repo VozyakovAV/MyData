@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutEmpty.cshtml";
+}
+@section css {
+    <link href="~/Content/Pages/Lern.css" rel="stylesheet">
+}
+
+<div class="container">
+    <div id="question"></div>
+    <div id="message"></div>
+    <div id="answers"></div>
+</div>
+
+
+@section scripts {
+<script type="text/javascript">
+    $(function () {
+        $("#answers").delegate(".answer a", "click", function (e) {
+            e.preventDefault();
+            var answerID = $(this).data("id");
+            ChechAnswer(answerID);
+        });
+
+        NextQuestion();
+
+        function NextQuestion() {
+            var url = "@Url.Action("NextQuestion")";
+            $.ajax({
+                type: "POST",
+                url: url,
+                success: function (response) {
+                    console.log(response);
+                    $('#question').html(response.Question);
+                    $('#answers').empty();
+                    $.each(response.Answers, function (i, answer) {
+                        $('#answers').append("<div class='answer'><a href='#' class='btn btn-info' data-id='" + i + "'>" + answer + "</a></div>");
+                    });
+                }
+            });
+        }
+        function ChechAnswer(answerID) {
+            var url = "@Url.Action("CheckAnswer")";
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: { answer: answerID },
+                success: function (response) {
+                    console.log(response);
+                    if (response.IsCorrect) {
+                        ViewSuccess();
+                    } else {
+                        ViewError();
+                    }
+                }
+            });
+        }
+        function ViewSuccess() {
+            $('#message').html("Верно!").css("color", "green");
+        }
+        function ViewError() {
+            $('#message').html("Упс!").css("color", "red");
+        }
+    });
+</script>
+}

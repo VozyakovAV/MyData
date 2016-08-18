@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="EMail.cs" />
     <Compile Include="Extensions\DateTime.cs" />
+    <Compile Include="Extensions\List.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
