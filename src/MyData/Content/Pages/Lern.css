@@ -1,8 +1,12 @@
-﻿.container {
+﻿body {
+}
+.container {
     padding: 10px;
+    height: 100%;
 }
 #question {
     margin: 20px 0 30px 0; 
+    padding: 10px;
     text-align:center;
     font-size: 2em;
     border: 1px solid darkblue;
@@ -15,10 +19,19 @@
     font-size: 2em;
 }
 #answers {
-    margin: 0 0;
+    padding: 0px;
     text-align:center;
+    background:yellow;
 }
 #answers .answer {
-    display: inline-block;
+    float: left;
+    padding: 10px;
     margin: 10px;
+    border-radius: 4px;
+    font-size: 1.5em;
+    width: 45%;
+    min-height: 100px;
+    color: black;
+}
+.btnNext {
 }

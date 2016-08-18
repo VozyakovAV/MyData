@@ -17,12 +17,15 @@
 @section scripts {
 <script type="text/javascript">
     $(function () {
-        $("#answers").delegate(".answer a", "click", function (e) {
+        $("#answers").delegate(".answer", "click", function (e) {
             e.preventDefault();
-            var answerID = $(this).data("id");
-            ChechAnswer(answerID);
+            if ($(this).data("correctAnswer") == 1)
+                NextQuestion();
+            else {
+                var answerID = $(this).data("id");
+                ChechAnswer(answerID);
+            }
         });
-
         NextQuestion();
 
         function NextQuestion() {
@@ -35,8 +38,10 @@
                     $('#question').html(response.Question);
                     $('#answers').empty();
                     $.each(response.Answers, function (i, answer) {
-                        $('#answers').append("<div class='answer'><a href='#' class='btn btn-info' data-id='" + i + "'>" + answer + "</a></div>");
+                        $('#answers').append("<a href='#' class='answer label-info' data-id='" + i + "'>" + answer + "</a>");
                     });
+                    $('#answers').show();
+                    $('#message').empty();
                 }
             });
         }
@@ -49,18 +54,24 @@
                 success: function (response) {
                     console.log(response);
                     if (response.IsCorrect) {
-                        ViewSuccess();
+                        ViewSuccess(response);
                     } else {
-                        ViewError();
+                        ViewError(response);
                     }
                 }
             });
         }
-        function ViewSuccess() {
+        function ViewSuccess(response) {
             $('#message').html("Верно!").css("color", "green");
+            $('#answers').hide();
+            setTimeout(NextQuestion, 2000);
         }
-        function ViewError() {
+        function ViewError(responce) {
             $('#message').html("Упс!").css("color", "red");
+            $('#answers .answer').removeClass("label-info").addClass("label-danger");
+            var awr = $($('#answers .answer').get(responce.CorrectAnswer));
+            awr.removeClass("label-danger").addClass("label-success");
+            awr.data("correctAnswer", "1")
         }
     });
 </script>
