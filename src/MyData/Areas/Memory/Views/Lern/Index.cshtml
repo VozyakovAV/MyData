@@ -35,10 +35,11 @@
                 url: url,
                 success: function (response) {
                     console.log(response);
-                    $('#question').html(response.Question);
+                    $('#question').html(as.sys.htmlEncode(response.Question));
                     $('#answers').empty();
                     $.each(response.Answers, function (i, answer) {
-                        $('#answers').append("<a href='#' class='answer label-info' data-id='" + i + "'>" + answer + "</a>");
+                        var awr = as.sys.htmlEncode(answer);
+                        $('#answers').append("<a href='#' class='answer label-info' data-id='" + i + "'>" + awr + "</a>");
                     });
                     $('#answers').show();
                     $('#message').empty();

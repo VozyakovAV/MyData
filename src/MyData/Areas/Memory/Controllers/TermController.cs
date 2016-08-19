@@ -26,7 +26,7 @@ namespace MyData.Areas.Memory.Controllers
             return PartialView(vm);
         }
 
-        [HttpPost]
+        [HttpPost, ValidateInput(false)]
         public ActionResult CreateTerm(CTerm questionPattern)
         {
             var term = mng.Memory.CreateTerm(questionPattern);
@@ -44,7 +44,7 @@ namespace MyData.Areas.Memory.Controllers
             return View("Index");
         }
 
-        [HttpPost]
+        [HttpPost, ValidateInput(false)]
         public ActionResult EditTerm(CTerm questionPattern)
         {
             var term = mng.Memory.EditTerm(questionPattern);
