@@ -56,4 +56,5 @@ table pre {
     font-size: 1em;
     padding: 0px;
     margin: 0px;
+    max-width: 300px;
 }

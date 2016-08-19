@@ -1,7 +1,7 @@
 ﻿@model MyData.Models.TermRowVM
 
 <tr class="row">
-    <td><pre>@Html.Raw(@Model.Question)</pre></td>
+    <td><pre>@Html.Encode(@Html.Raw(@Model.Question))</pre></td>
     <td><pre>@Model.Answer</pre></td>
     <td>@Html.ActionLink("Del", "DeleteTerm", "Term", new { }, new { @class = "dialog-delete", data_id = Model.Id })</td>
     <td>@Html.ActionLink("Edit", "EditTerm", "Term", new { }, new { @class = "dialog-edit", data_id = Model.Id })</td>
