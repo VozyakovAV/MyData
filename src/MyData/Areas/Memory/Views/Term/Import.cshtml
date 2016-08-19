@@ -15,15 +15,19 @@
 @using (Html.BeginForm())
 {
     <div class="row">
-        <div class="col-sm-5">
+        <div class="col-sm-3">
             @Html.LabelFor(x => x.WordDelimeter)
             @Html.TextBoxFor(x => x.WordDelimeter, new { @class = "txtParam wordDelimeter form-control" })
         </div>
-        <div class="col-sm-5">
+        <div class="col-sm-3">
             @Html.LabelFor(x => x.RowDelimeter)
             @Html.TextBoxFor(x => x.RowDelimeter, new { @class = "txtParam rowDelimeter form-control" })
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-3">
+            @Html.CheckBoxFor(x => x.RevertValues, new { @class = "revertValues" }) 
+            @Html.LabelFor(x => x.RevertValues)
+        </div>
+        <div class="col-sm-3">
             <input type="submit" value="Импорт" class="btn btn-primary" />
         </div>
     </div>
@@ -40,12 +44,16 @@
         $('.txtParam').on('input', function (e) {
             DoImport();
         });
+        $(".revertValues").change(function () {
+            DoImport();
+        });
         function DoImport() {
             var text = $(".txtText").val();
             var wordDelimeter = $(".wordDelimeter").val();
             var rowDelimeter = $(".rowDelimeter").val();
+            var revertValues = $(".revertValues").is(':checked');
             var url = "@Url.Action("DoImport")";
-            var params = { text: text, wordDelimeter: wordDelimeter, rowDelimeter: rowDelimeter };
+            var params = { text: text, wordDelimeter: wordDelimeter, rowDelimeter: rowDelimeter, revertValues: revertValues };
 
             $.ajax({
                 type: "POST",
@@ -56,6 +64,7 @@
 
                     if (data.result) {
                         var s = [];
+                        s.push("<div class='row'><div class='col-xs-6'>Вопросы</div><div class='col-xs-6'></div>Ответы</div>")
                         $.each(data.result, function (i, term) {
                             s.push("<div class='row'>");
                             s.push("<div class='col-xs-6'><pre>" + as.sys.htmlEncode(term.Question) + "</pre></div>");

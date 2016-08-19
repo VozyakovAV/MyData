@@ -11,6 +11,7 @@ namespace MyData.Models
         public string SetName { get; set; }
         public string WordDelimeter { get; set; }
         public string RowDelimeter { get; set; }
+        public bool RevertValues { get; set; }
         public string Text { get; set; }
     }
 }

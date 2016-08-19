@@ -11,7 +11,7 @@ namespace MyData.BLL.Site
         public ImportExportTermsManager(ManagerSite manager) : base(manager)
         { }
 
-        public List<TermSimple> ParseTerms(string text, string wordDelimeter, string rowDelimeter)
+        public List<TermSimple> ParseTerms(string text, string wordDelimeter, string rowDelimeter, bool revertValues)
         {
             var result = new List<TermSimple>();
             if (string.IsNullOrEmpty(text) || string.IsNullOrEmpty(wordDelimeter) || string.IsNullOrEmpty(rowDelimeter))
@@ -25,15 +25,21 @@ namespace MyData.BLL.Site
                 if (words.Length >= 2)
                 {
                     var term = new TermSimple() { Question = words[0].Trim(), Answer = words[1].Trim() };
+                    if (revertValues)
+                    {
+                        var t = term.Question;
+                        term.Question = term.Answer;
+                        term.Answer = t;
+                    }
                     result.Add(term);
                 }
             }
             return result;
         }
 
-        public void ImportTerms(int setID, string text, string wordDelimeter, string rowDelimeter)
+        public void ImportTerms(int setID, string text, string wordDelimeter, string rowDelimeter, bool revertValues)
         {
-            var terms = ParseTerms(text, wordDelimeter, rowDelimeter);
+            var terms = ParseTerms(text, wordDelimeter, rowDelimeter, revertValues);
             foreach (var term in terms)
             {
                 var newTerm = ManagerSite.Memory.NewTerm(term.Question, term.Answer);

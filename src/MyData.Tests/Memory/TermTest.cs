@@ -55,7 +55,7 @@ namespace MyData.Tests.Domains
             vm.WordDelimeter = " ---- ";
             vm.RowDelimeter = " ;;;; ";
             vm.Text = "1 ---- 2 ;;;; 3 ---- 4";
-            mng.ImportExportTerms.ImportTerms(vm.SetID, vm.Text, vm.WordDelimeter, vm.RowDelimeter);
+            mng.ImportExportTerms.ImportTerms(vm.SetID, vm.Text, vm.WordDelimeter, vm.RowDelimeter, false);
             var terms = GetAllTerms(set.Id);
             Assert.AreEqual(2, terms.Count);
             Assert.AreEqual("1", terms[0].Question);

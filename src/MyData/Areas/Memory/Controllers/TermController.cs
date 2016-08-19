@@ -70,14 +70,14 @@ namespace MyData.Areas.Memory.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult Import(ImportVM vm)
         {
-            mng.ImportExportTerms.ImportTerms(vm.SetID, vm.Text, vm.WordDelimeter, vm.RowDelimeter);
+            mng.ImportExportTerms.ImportTerms(vm.SetID, vm.Text, vm.WordDelimeter, vm.RowDelimeter, vm.RevertValues);
             return RedirectToRoute("RouteSet", new { setID = vm.SetID });
         }
 
         [HttpPost, ValidateInput(false)]
-        public JsonResult DoImport(string text, string wordDelimeter, string rowDelimeter)
+        public JsonResult DoImport(string text, string wordDelimeter, string rowDelimeter, bool revertValues)
         {
-            var terms = mng.ImportExportTerms.ParseTerms(text, wordDelimeter, rowDelimeter);
+            var terms = mng.ImportExportTerms.ParseTerms(text, wordDelimeter, rowDelimeter, revertValues);
             return Json(new
             {
                 result = terms
