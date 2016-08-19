@@ -1,3 +1,4 @@
+*.user
 src/.vs/
 src/Common/bin/
 src/Common/obj/

@@ -32,16 +32,16 @@ namespace MyData.Areas.Memory.Controllers
                 return Json(false);
             terms.Shuffle();
             var term = terms.First();
-            var otherAnswers = terms.Where(x => x.Id != term.Id).Select(x => x.Question).Distinct().Take(3).ToList();
+            var otherAnswers = terms.Where(x => x.Id != term.Id).Select(x => x.Answer).Distinct().Take(3).ToList();
 
             var q = new TestQuestion();
-            q.Question = term.Answer;
+            q.Question = term.Question;
             var answers = new List<string>();
-            answers.Add(term.Question);
+            answers.Add(term.Answer);
             answers.AddRange(otherAnswers);
             answers.Shuffle();
             q.Answers = answers.ToArray();
-            data.CorrectAnswer = answers.IndexOf(term.Question);
+            data.CorrectAnswer = answers.IndexOf(term.Answer);
 
             return Json(q);
         }
