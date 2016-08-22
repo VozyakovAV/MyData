@@ -8,14 +8,36 @@
 }
 
 <div class="container">
-    <div id="question"></div>
+    <div id="question">
+        <pre id="editor"></pre>
+    </div>
     <div id="message"></div>
     <div id="answers"></div>
 </div>
 
 
 @section scripts {
+<script src="~/JS/ace/ace.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
+    
+    InitEditor("editor");
+
+    function InitEditor(id) {
+        var editor = ace.edit(id);
+        editor.setTheme("ace/theme/twilight");
+        editor.session.setMode("ace/mode/csharp");
+        editor.setReadOnly(true);
+        editor.setFontSize(16);
+        editor.setPrintMarginColumn(false);
+    }
+
+    function InsertText(text) {
+        var editor = ace.edit("editor");
+        editor.selectAll();
+        editor.removeLines();
+        editor.insert(text);
+    }
+
     $(function () {
         $("#answers").delegate(".answer", "click", function (e) {
             e.preventDefault();
@@ -35,7 +57,7 @@
                 url: url,
                 success: function (response) {
                     console.log(response);
-                    $('#question').html(as.sys.htmlEncode(response.Question));
+                    InsertText(response.Question);
                     $('#answers').empty();
                     $.each(response.Answers, function (i, answer) {
                         var awr = as.sys.htmlEncode(answer);

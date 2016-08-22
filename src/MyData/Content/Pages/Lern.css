@@ -6,7 +6,7 @@
 }
 #question {
     margin: 20px 0 30px 0; 
-    padding: 10px;
+    padding: 0px;
     text-align:center;
     font-size: 2em;
     border: 1px solid darkblue;
@@ -35,4 +35,9 @@
     text-decoration: none;
 }
 .btnNext {
+}
+.ace_editor {
+    margin: 0px;
+    padding: 10px;
+    min-height:200px;
 }
