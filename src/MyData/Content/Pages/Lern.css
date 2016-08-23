@@ -25,14 +25,18 @@
 }
 #answers .answer {
     float: left;
-    padding: 10px;
     margin: 10px;
     border-radius: 4px;
     font-size: 1.5em;
     width: 45%;
     min-height: 100px;
-    color: black;
     text-decoration: none;
+}
+#answers pre {
+    border: none;
+    background: transparent;
+    font-size: inherit;
+    margin: 0px;
 }
 .btnNext {
 }

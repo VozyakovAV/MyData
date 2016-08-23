@@ -45,7 +45,7 @@
                     $('#answers').empty();
                     $.each(response.Answers, function (i, answer) {
                         var awr = as.sys.htmlEncode(answer);
-                        $('#answers').append("<a href='#' class='answer label-info' data-id='" + i + "'>" + awr + "</a>");
+                        $('#answers').append("<a href='#' class='answer label-info' data-id='" + i + "'><pre>" + awr + "</pre></a>");
                     });
                     $('#answers').show();
                     $('#message').empty();
