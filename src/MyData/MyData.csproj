@@ -548,6 +548,7 @@
     <Content Include="JS\ace\worker-xml.js" />
     <Content Include="JS\ace\worker-xquery.js" />
     <Content Include="JS\ace\_readme.txt" />
+    <Content Include="JS\as.ace.js" />
     <Content Include="JS\as.sys2.js" />
     <Content Include="JS\as.sys.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

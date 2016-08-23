@@ -36,6 +36,10 @@ namespace MyData
 
             bundles.Add(new ScriptBundle("~/bundles/jasny").Include(
                         "~/Scripts/jasny-*"));
+
+            bundles.Add(new ScriptBundle("~/bundles/ace").Include(
+                        "~/JS/ace/ace.js",
+                        "~/JS/as.ace.js"));
         }
     }
 }

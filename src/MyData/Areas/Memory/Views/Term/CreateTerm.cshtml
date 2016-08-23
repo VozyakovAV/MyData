@@ -1,11 +1,20 @@
 ﻿@using Domain
 @model MyData.Models.TermEditVM
+
+<style>
+    .ace_editor {
+    margin: 0px;
+    padding: 10px;
+    min-height:200px;
+}
+</style>
 <div>
     @using (Html.BeginForm())
     {
         <div>
             @Html.LabelFor(x => x.Question)
-            <p>@Html.TextAreaFor(x => x.Question, new { @class = "form-control", autofocus = "" })</p>
+            @Html.HiddenFor(x => x.Question)
+            <p><pre id="editor" ></pre></p>
         </div>
 
         <div>
@@ -19,3 +28,10 @@
         </div>
     }
 </div>
+
+@Scripts.Render("~/bundles/ace")
+<script type="text/javascript">
+    var helper = as.ace.init({ el: "editor", readonly: true });
+    helper.editor.focus();
+    helper.autoCopyText("#Question");
+</script>

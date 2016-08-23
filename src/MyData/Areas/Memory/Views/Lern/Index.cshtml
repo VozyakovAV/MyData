@@ -18,25 +18,9 @@
 
 @section scripts {
 <script src="~/JS/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="~/JS/as.ace.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
-    
-    InitEditor("editor");
-
-    function InitEditor(id) {
-        var editor = ace.edit(id);
-        editor.setTheme("ace/theme/twilight");
-        editor.session.setMode("ace/mode/csharp");
-        editor.setReadOnly(true);
-        editor.setFontSize(16);
-        editor.setPrintMarginColumn(false);
-    }
-
-    function InsertText(text) {
-        var editor = ace.edit("editor");
-        editor.selectAll();
-        editor.removeLines();
-        editor.insert(text);
-    }
+    var helper = as.ace.init({ el: "editor", readonly: true });
 
     $(function () {
         $("#answers").delegate(".answer", "click", function (e) {
@@ -57,7 +41,7 @@
                 url: url,
                 success: function (response) {
                     console.log(response);
-                    InsertText(response.Question);
+                    helper.insertText(response.Question);
                     $('#answers').empty();
                     $.each(response.Answers, function (i, answer) {
                         var awr = as.sys.htmlEncode(answer);
