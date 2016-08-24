@@ -26,6 +26,9 @@ namespace MyData.BLL.Site
         private ImportExportTermsManager _importExportTerms = null;
         public ImportExportTermsManager ImportExportTerms { get { return Get<ImportExportTermsManager>(_importExportTerms, this); } }
 
+        private LernManager _lern = null;
+        public LernManager Lern { get { return Get<LernManager>(_lern, this); } }
+
         private UnitOfWork _uow;
 
         public void SaveDataBase()

@@ -5,92 +5,41 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Common;
+using MyData.Models;
 
 namespace MyData.Areas.Memory.Controllers
 {
     public class LernController : BaseController
     {
+        private const string DATA_SESSION = "LernData";
+
         public ActionResult Index(int setID = 0)
         {
-            var set = mng.Memory.GetSet(setID);
-            if (set == null)
+            var data = mng.Lern.CreateLernData(setID);
+            if (data == null)
                 return HttpNotFound();
-            var data = new TestData() { SetID = set.Id };
+
             Session[DATA_SESSION] = data;
-            
             return View();
         }
 
-        private const string DATA_SESSION = "TestData";
         public JsonResult NextQuestion()
         {
-            var data = Session[DATA_SESSION] as TestData;
+            var data = Session[DATA_SESSION] as LernData;
             if (data == null)
                 return Json(false);
-            var terms = mng.Memory.GetTerms(data.SetID);
-            if (terms.Count == 0)
-                return Json(false);
-            terms.Shuffle();
-            var term = terms.First();
-            var otherAnswers = terms.Where(x => x.Id != term.Id).Select(x => x.Answer).Distinct().Take(3).ToList();
 
-            var q = new TestQuestion();
-            q.Question = term.Question;
-            var answers = new List<string>();
-            answers.Add(term.Answer);
-            answers.AddRange(otherAnswers);
-            answers.Shuffle();
-            q.Answers = answers.ToArray();
-            data.CorrectAnswer = answers.IndexOf(term.Answer);
-
-            return Json(q);
+            var res = data.NextQuestion();
+            return Json(res);
         }
 
         public JsonResult CheckAnswer(int answer)
         {
-            var data = Session[DATA_SESSION] as TestData;
+            var data = Session[DATA_SESSION] as LernData;
             if (data == null)
                 return Json(false);
-
-            var res = new CheckAnswerResult();
-            res.CorrectAnswer = data.CorrectAnswer;
-            if (data.CorrectAnswer == answer)
-                res.IsCorrect = true;
-            data.CheckAnswer();
-
+            var res = data.CheckAnswer(answer);
             return Json(res);
         }
-    }
-
-    public class TestData
-    {
-        public int SetID { get; set; }
-
-        private int _correctAnswer;
-        public int CorrectAnswer
-        {
-            get { return _correctAnswer; }
-            set { _correctAnswer = value; _isChecked = false; }
-        }
-
-        private bool _isChecked;
-        public bool IsChecked { get { return _isChecked; } }
-
-        public void CheckAnswer()
-        {
-            _isChecked = true;
-        }
-    }
-
-    public class TestQuestion
-    {
-        public string Question { get; set; }
-        public string[] Answers { get; set; }
-    }
-
-    public class CheckAnswerResult
-    {
-        public bool IsCorrect { get; set; }
-        public int CorrectAnswer { get; set; }
     }
 }

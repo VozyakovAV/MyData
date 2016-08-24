@@ -140,6 +140,8 @@
     <Compile Include="Areas\Memory\MemoryAreaRegistration.cs" />
     <Compile Include="Areas\Memory\Models\ExportVM.cs" />
     <Compile Include="Areas\Memory\Models\ImportVM.cs" />
+    <Compile Include="Areas\Memory\Models\Lern\LernData.cs" />
+    <Compile Include="Areas\Memory\Models\Lern\Questions.cs" />
     <Compile Include="Areas\Memory\Models\MemoryMenuVM.cs" />
     <Compile Include="Areas\Memory\Models\TermEditVM.cs" />
     <Compile Include="Areas\Memory\Models\FolderEditVM.cs" />
@@ -154,6 +156,7 @@
     <Compile Include="BLL\RDL\Debug.cs" />
     <Compile Include="BLL\Site\Base\BaseManager.cs" />
     <Compile Include="BLL\Site\Base\Collection.cs" />
+    <Compile Include="BLL\Site\LernManager.cs" />
     <Compile Include="BLL\Site\ImportManager.cs" />
     <Compile Include="BLL\Site\ManagerSite.cs" />
     <Compile Include="BLL\Site\IterationManager.cs" />
