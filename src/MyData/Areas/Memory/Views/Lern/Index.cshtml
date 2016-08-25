@@ -8,78 +8,39 @@
 }
 
 <div class="container">
-    <div id="question">
-        <pre id="editor"></pre>
+    <div id="lernTest">
+        <div class="question">
+            <pre id="editor"></pre>
+        </div>
+        <div class="message"></div>
+        <div class="answers"></div>
     </div>
-    <div id="message"></div>
-    <div id="answers"></div>
 </div>
 
 
 @section scripts {
 <script src="~/JS/ace/ace.js" type="text/javascript" charset="utf-8"></script>
 <script src="~/JS/as.ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="~/JS/Lern/lern.test.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
-    var helper = as.ace.init({ el: "editor", readonly: true });
+    var optTest = {
+        elEditor: "editor", elMessage: "#lernTest .message", elAnswers: "#lernTest .answers",
+        urlCheckAnswer: "@Url.Action("CheckAnswerTest")", ttt: NextQuestion
+    };
+    var lernTest = lern.test.init(optTest);
 
-    $(function () {
-        $("#answers").delegate(".answer", "click", function (e) {
-            e.preventDefault();
-            if ($(this).data("correctAnswer") == 1)
-                NextQuestion();
-            else {
-                var answerID = $(this).data("id");
-                ChechAnswer(answerID);
+    function NextQuestion() {
+        var url = "@Url.Action("NextQuestion")";
+        $.ajax({ type: "POST", url: url,
+            success: function (response) {
+                console.log(response);
+                lernTest.showQuestion(response);
             }
         });
-        NextQuestion();
+    }
 
-        function NextQuestion() {
-            var url = "@Url.Action("NextQuestion")";
-            $.ajax({
-                type: "POST",
-                url: url,
-                success: function (response) {
-                    console.log(response);
-                    helper.insertText(response.Question);
-                    $('#answers').empty();
-                    $.each(response.Answers, function (i, answer) {
-                        var awr = as.sys.htmlEncode(answer);
-                        $('#answers').append("<a href='#' class='answer label-info' data-id='" + i + "'><pre>" + awr + "</pre></a>");
-                    });
-                    $('#answers').show();
-                    $('#message').empty();
-                }
-            });
-        }
-        function ChechAnswer(answerID) {
-            var url = "@Url.Action("CheckAnswer")";
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: { answer: answerID },
-                success: function (response) {
-                    console.log(response);
-                    if (response.IsCorrect) {
-                        ViewSuccess(response);
-                    } else {
-                        ViewError(response);
-                    }
-                }
-            });
-        }
-        function ViewSuccess(response) {
-            $('#message').html("Верно!").css("color", "green");
-            $('#answers').hide();
-            setTimeout(NextQuestion, 2000);
-        }
-        function ViewError(responce) {
-            $('#message').html("Упс!").css("color", "red");
-            $('#answers .answer').removeClass("label-info").addClass("label-danger");
-            var awr = $($('#answers .answer').get(responce.CorrectAnswer));
-            awr.removeClass("label-danger").addClass("label-success");
-            awr.data("correctAnswer", "1")
-        }
+    $(function () {
+        NextQuestion();
     });
 </script>
 }

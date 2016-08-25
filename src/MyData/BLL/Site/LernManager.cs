@@ -40,8 +40,16 @@ namespace MyData.BLL.Site
         private TermQuestion CreateTermQuestion(CSet set, CTerm term, IEnumerable<CTerm> terms)
         {
             var res = new TermQuestion();
-            res.Question = CreateTestQuestion(set, term, terms);
-            res.Answer = CreateTestAnswer(term, (TestQuestion)res.Question);
+            if (true)// term.Answer.Length > 10)
+            {
+                res.Question = CreateTestQuestion(set, term, terms);
+                res.Answer = CreateTestAnswer(term, (TestQuestion)res.Question);
+            }
+            else
+            {
+                res.Question = CreateWordQuestion(set, term, terms);
+                res.Answer = CreateWordAnswer(term, (WordQuestion)res.Question);
+            }
             return res;
         }
 
@@ -69,6 +77,24 @@ namespace MyData.BLL.Site
         {
             var res = new TestAnswer();
             res.NumberAnswer = question.Answers.ToList().IndexOf(term.Answer);
+            return res;
+        }
+
+        //
+
+        private WordQuestion CreateWordQuestion(CSet set, CTerm term, IEnumerable<CTerm> terms)
+        {
+            var res = new WordQuestion();
+            res.SetID = set.Id;
+            res.SetName = set.Name;
+            res.Question = term.Question;
+            return res;
+        }
+
+        private WordAnswer CreateWordAnswer(CTerm term, WordQuestion question)
+        {
+            var res = new WordAnswer();
+            res.Answer = term.Answer;
             return res;
         }
     }

@@ -33,12 +33,21 @@ namespace MyData.Areas.Memory.Controllers
             return Json(res);
         }
 
-        public JsonResult CheckAnswer(int answer)
+        public JsonResult CheckAnswerTest(int answer)
         {
             var data = Session[DATA_SESSION] as LernData;
             if (data == null)
                 return Json(false);
-            var res = data.CheckAnswer(answer);
+            var res = data.CheckAnswer(answerInt: answer);
+            return Json(res);
+        }
+
+        public JsonResult CheckAnswerWord(string answer)
+        {
+            var data = Session[DATA_SESSION] as LernData;
+            if (data == null)
+                return Json(false);
+            var res = data.CheckAnswer(answerSt: answer);
             return Json(res);
         }
     }

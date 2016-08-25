@@ -24,7 +24,7 @@ namespace MyData.Models
             return CurrentQuestion == null ? null : CurrentQuestion.Question;
         }
 
-        public TestAnswerResult CheckAnswer(int answer)
+        public AnswerResult CheckAnswer(int answerInt = 0, string answerSt = "")
         {
             if (CurrentQuestion == null)
                 return null;
@@ -33,21 +33,36 @@ namespace MyData.Models
                 var awr = CurrentQuestion.Answer as TestAnswer;
                 var res = new TestAnswerResult();
                 res.CorrectAnswer = awr.NumberAnswer;
-                res.IsCorrect = awr.NumberAnswer == answer;
+                res.IsCorrect = awr.NumberAnswer == answerInt;
+                AllowNextQuestion = true;
+                return res;
+            }
+            if (CurrentQuestion.Question is WordQuestion)
+            {
+                var awr = CurrentQuestion.Answer as WordAnswer;
+                var res = new WordAnswerResult();
+                res.CorrectAnswer = awr.Answer;
+                res.IsCorrect = awr.Answer == answerSt;
                 AllowNextQuestion = true;
                 return res;
             }
             return null;
         }
-
-        
     }
 
-    
 
-    public class TestAnswerResult
+    public class AnswerResult
     {
         public bool IsCorrect { get; set; }
+    }
+
+    public class TestAnswerResult : AnswerResult
+    {
         public int CorrectAnswer { get; set; }
+    }
+
+    public class WordAnswerResult : AnswerResult
+    {
+        public string CorrectAnswer { get; set; }
     }
 }

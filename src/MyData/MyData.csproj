@@ -586,6 +586,7 @@
     <Content Include="Areas\Memory\Views\Lern\Index.cshtml" />
     <None Include="Properties\PublishProfiles\masterhost.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="JS\Lern\lern.test.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jasny-bootstrap.js" />
