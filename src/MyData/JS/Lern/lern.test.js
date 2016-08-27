@@ -1,79 +1,75 @@
-﻿
-var lern = lern || {};
+﻿function LernTest(elContent, elEditor, elMessage, elAnswers, urlCheckAnswer, nextQuestion) {
+    var _elContent = elContent;
+    var _elEditor = elEditor;
+    var _elMessage = elMessage;
+    var _elAnswers = elAnswers;
+    var _urlCheckAnswer = urlCheckAnswer;
+    var _nextQuestion = nextQuestion;
+    var _helper = undefined;
 
-lern.test = {
-    opt: {
-        elContent: "",
-        elEditor: "",
-        elMessage: "",
-        elAnswers: "",
-        urlCheckAnswer: "",
-        nextQuection: undefined,
-    },
-    helper: undefined,
-    getEditor: function() {
-        return $(this.opt.elContent + " " + this.opt.elEditor);
-    },
-    getMessage: function () {
-        return $(this.opt.elContent + " " + this.opt.elMessage);
-    },
-    getAnswers: function () {
-        return $(this.opt.elContent + " " + this.opt.elAnswers);
-    },
-    init: function (opt) {
-        this.opt = $.extend(this.opt, opt);
-        this.helper = as.ace.init({ el: this.opt.elEditor, readonly: true });
-        this.initEvents();
-        return this;
-    },
-    initEvents: function () {
-        this.getAnswers().delegate(".answer", "click", function (e) {
+    var getEditor = function () {
+        return $(_elContent + " " + _elEditor);
+    };
+    var getMessage = function () {
+        return $(_elContent + " " + _elMessage);
+    };
+    var getAnswers = function () {
+        return $(_elContent + " " + _elAnswers);
+    };
+    var init = function() {
+        _helper = new HelperAce(_elEditor, true);
+        initEvents();
+    };
+    var initEvents = function () {
+        getAnswers().delegate(".answer", "click", function (e) {
             e.preventDefault();
             if ($(this).data("correctAnswer") == 1)
-                this.next();
+                next();
             else {
                 var answerID = $(this).data("id");
-                this.checkAnswer(answerID);
+                checkAnswer(answerID);
             }
         });
-    },
-    showQuestion: function (testData) {
-        this.helper.insertText(testData.Question);
-        this.getMessage().empty();
-        var divAnswers = this.getAnswers();
+    };
+    this.showQuestion = function(testData) {
+        _helper.insertText(testData.Question);
+        getMessage().empty();
+        var divAnswers = getAnswers();
         divAnswers.empty();
         $.each(testData.Answers, function (i, answer) {
             var awr = as.sys.htmlEncode(answer);
             var link = "<a href='#' class='answer label-info' data-id='" + i + "'><pre>" + awr + "</pre></a>";
             divAnswers.append(link);
         });
-        this.getAnswers().show();
-    },
-    checkAnswer: function(answerID) {
-        $.ajax({ type: "POST", url: this.opt.urlCheckAnswer, data: { answer: answerID },
+        getAnswers().show();
+    };
+    var checkAnswer = function(answerID) {
+        $.ajax({ type: "POST", url: _urlCheckAnswer, data: { answer: answerID },
             success: function (response) {
                 console.log(response);
                 if (response.IsCorrect) {
-                    this.viewSuccess(response);
+                    viewSuccess(response);
                 } else {
-                    this.viewError(response);
+                    viewError(response);
                 }
             }
         });
-    },
-    viewSuccess: function(response) {
-        this.getMessage().html("Верно!").css("color", "green");
-        this.getAnswers().hide();
-        setTimeout(this.next, 2000);
-    },
-    viewError: function(responce) {
-        this.getMessage().html("Упс!").css("color", "red");
-        this.getAnswers().filter('.answer').removeClass("label-info").addClass("label-danger");
-        var awr = $(this.getAnswers().filter('.answer').get(responce.CorrectAnswer));
+    };
+    var viewSuccess = function (response) {
+        getMessage().html("Верно!").css("color", "green");
+        getAnswers().hide();
+        setTimeout(next, 2000);
+    };
+    var viewError = function (responce) {
+        getMessage().html("Упс!").css("color", "red");
+        getAnswers().children('.answer').removeClass("label-info").addClass("label-danger");
+        var awr = $(getAnswers().children('.answer').get(responce.CorrectAnswer));
         awr.removeClass("label-danger").addClass("label-success");
         awr.data("correctAnswer", "1")
-    },
-    next: function () {
-        this.opt.nextQuection();
-    }
+    };
+    var next = function () {
+        _nextQuestion();
+    };
+
+    init();
 };

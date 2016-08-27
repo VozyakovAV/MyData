@@ -31,21 +31,17 @@
 <script src="~/JS/Lern/lern.test.js" type="text/javascript" charset="utf-8"></script>
 <script src="~/JS/Lern/lern.word.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
-    var user = new User();
-    user.displayInfo()
-
-
     var optTest = {
         elContent: "#lernTest", elEditor: "testEditor", elMessage: ".message", elAnswers: ".answers",
         urlCheckAnswer: "@Url.Action("CheckAnswerTest")", nextQuection: NextQuestion
     };
-    var lernTest = lern.test.init(optTest);
+    var lernTest = new LernTest("#lernTest", "testEditor", ".message", ".answers", "@Url.Action("CheckAnswerTest")", NextQuestion);
 
     var optWord = {
         elContent: "#lernWord", elEditor: "wordEditor", elMessage: ".message",
         urlCheckAnswer: "@Url.Action("CheckAnswerWord")", nextQuection: NextQuestion
     };
-    var lernWord = lern.word.init(optWord);
+    //var lernWord = lern.word.init(optWord);
 
     function NextQuestion() {
         var url = "@Url.Action("NextQuestion")";
@@ -54,8 +50,8 @@
                 console.log(response);
                 if (response.Type == "test")
                     lernTest.showQuestion(response);
-                if (response.Type == "word")
-                    lernWord.showQuestion(response);
+                //if (response.Type == "word")
+                  //  lernWord.showQuestion(response);
             }
         });
     }

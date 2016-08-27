@@ -11,7 +11,7 @@ namespace MyData.BLL.Site
 {
     public class LernManager : ManagerBase
     {
-        public const int COUNT_QUESTIONS = 7;
+        public const int COUNT_QUESTIONS = 100;
         public LernManager(ManagerSite manager) : base(manager)
         { }
 
