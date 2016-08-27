@@ -2,68 +2,78 @@
 var lern = lern || {};
 
 lern.test = {
-    options: {
+    opt: {
+        elContent: "",
         elEditor: "",
         elMessage: "",
         elAnswers: "",
         urlCheckAnswer: "",
-        ttt: undefined,
+        nextQuection: undefined,
     },
     helper: undefined,
-    init: function (options) {
-        lern.test.options = $.extend(lern.test.options, options);
-        helper = as.ace.init({ el: lern.test.options.elEditor, readonly: true });
-        lern.test.initEvents();
+    getEditor: function() {
+        return $(this.opt.elContent + " " + this.opt.elEditor);
+    },
+    getMessage: function () {
+        return $(this.opt.elContent + " " + this.opt.elMessage);
+    },
+    getAnswers: function () {
+        return $(this.opt.elContent + " " + this.opt.elAnswers);
+    },
+    init: function (opt) {
+        this.opt = $.extend(this.opt, opt);
+        this.helper = as.ace.init({ el: this.opt.elEditor, readonly: true });
+        this.initEvents();
         return this;
     },
-    initEvents: function() {
-        $(lern.test.options.elAnswers).delegate(".answer", "click", function (e) {
+    initEvents: function () {
+        this.getAnswers().delegate(".answer", "click", function (e) {
             e.preventDefault();
             if ($(this).data("correctAnswer") == 1)
-                lern.test.next();
+                this.next();
             else {
                 var answerID = $(this).data("id");
-                lern.test.checkAnswer(answerID);
+                this.checkAnswer(answerID);
             }
         });
     },
     showQuestion: function (testData) {
-        helper.insertText(testData.Question);
-        $(lern.test.options.elMessage).empty();
-        $(lern.test.options.elAnswers).empty();
+        this.helper.insertText(testData.Question);
+        this.getMessage().empty();
+        var divAnswers = this.getAnswers();
+        divAnswers.empty();
         $.each(testData.Answers, function (i, answer) {
             var awr = as.sys.htmlEncode(answer);
             var link = "<a href='#' class='answer label-info' data-id='" + i + "'><pre>" + awr + "</pre></a>";
-            $(lern.test.options.elAnswers).append(link);
+            divAnswers.append(link);
         });
-        $(lern.test.options.elAnswers).show();
-        $(lern.test.options.elMessage).empty();
+        this.getAnswers().show();
     },
     checkAnswer: function(answerID) {
-        $.ajax({ type: "POST", url: lern.test.options.urlCheckAnswer, data: { answer: answerID },
+        $.ajax({ type: "POST", url: this.opt.urlCheckAnswer, data: { answer: answerID },
             success: function (response) {
                 console.log(response);
                 if (response.IsCorrect) {
-                    lern.test.viewSuccess(response);
+                    this.viewSuccess(response);
                 } else {
-                    lern.test.viewError(response);
+                    this.viewError(response);
                 }
             }
         });
     },
     viewSuccess: function(response) {
-        $(lern.test.options.elMessage).html("Верно!").css("color", "green");
-        $(lern.test.options.elAnswers).hide();
-        setTimeout(lern.test.next, 2000);
+        this.getMessage().html("Верно!").css("color", "green");
+        this.getAnswers().hide();
+        setTimeout(this.next, 2000);
     },
     viewError: function(responce) {
-        $(lern.test.options.elMessage).html("Упс!").css("color", "red");
-        $(lern.test.options.elAnswers + ' .answer').removeClass("label-info").addClass("label-danger");
-        var awr = $($(lern.test.options.elAnswers + ' .answer').get(responce.CorrectAnswer));
+        this.getMessage().html("Упс!").css("color", "red");
+        this.getAnswers().filter('.answer').removeClass("label-info").addClass("label-danger");
+        var awr = $(this.getAnswers().filter('.answer').get(responce.CorrectAnswer));
         awr.removeClass("label-danger").addClass("label-success");
         awr.data("correctAnswer", "1")
     },
     next: function () {
-        lern.test.options.ttt();
+        this.opt.nextQuection();
     }
 };

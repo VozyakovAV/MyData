@@ -10,10 +10,17 @@
 <div class="container">
     <div id="lernTest">
         <div class="question">
-            <pre id="editor"></pre>
+            <pre id="testEditor"></pre>
         </div>
         <div class="message"></div>
         <div class="answers"></div>
+    </div>
+    <div id="lernWord" style="display: none">
+        <div class="question">
+            <pre id="wordEditor"></pre>
+        </div>
+        <div class="message"></div>
+        <input type="text" class="answer form-control" />
     </div>
 </div>
 
@@ -22,19 +29,33 @@
 <script src="~/JS/ace/ace.js" type="text/javascript" charset="utf-8"></script>
 <script src="~/JS/as.ace.js" type="text/javascript" charset="utf-8"></script>
 <script src="~/JS/Lern/lern.test.js" type="text/javascript" charset="utf-8"></script>
+<script src="~/JS/Lern/lern.word.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
+    var user = new User();
+    user.displayInfo()
+
+
     var optTest = {
-        elEditor: "editor", elMessage: "#lernTest .message", elAnswers: "#lernTest .answers",
-        urlCheckAnswer: "@Url.Action("CheckAnswerTest")", ttt: NextQuestion
+        elContent: "#lernTest", elEditor: "testEditor", elMessage: ".message", elAnswers: ".answers",
+        urlCheckAnswer: "@Url.Action("CheckAnswerTest")", nextQuection: NextQuestion
     };
     var lernTest = lern.test.init(optTest);
+
+    var optWord = {
+        elContent: "#lernWord", elEditor: "wordEditor", elMessage: ".message",
+        urlCheckAnswer: "@Url.Action("CheckAnswerWord")", nextQuection: NextQuestion
+    };
+    var lernWord = lern.word.init(optWord);
 
     function NextQuestion() {
         var url = "@Url.Action("NextQuestion")";
         $.ajax({ type: "POST", url: url,
             success: function (response) {
                 console.log(response);
-                lernTest.showQuestion(response);
+                if (response.Type == "test")
+                    lernTest.showQuestion(response);
+                if (response.Type == "word")
+                    lernWord.showQuestion(response);
             }
         });
     }

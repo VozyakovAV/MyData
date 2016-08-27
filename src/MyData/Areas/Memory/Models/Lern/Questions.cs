@@ -13,6 +13,7 @@ namespace MyData.Models
 
     public abstract class BaseQuestion
     {
+        public abstract string Type { get; }
         public int SetID { get; set; }
         public string SetName { get; set; }
     }
@@ -23,6 +24,11 @@ namespace MyData.Models
     public class WordQuestion : BaseQuestion
     {
         public string Question { get; set; }
+
+        public override string Type
+        {
+            get { return "word"; }
+        }
     }
 
     public class WordAnswer : BaseAnswer
@@ -34,6 +40,10 @@ namespace MyData.Models
     {
         public string Question { get; set; }
         public string[] Answers { get; set; }
+        public override string Type
+        {
+            get { return "test"; }
+        }
     }
 
     public class TestAnswer : BaseAnswer

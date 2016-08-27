@@ -1,16 +1,4 @@
-﻿function HelperAce(options) {
-    this.opt = { el: "", readonly: false};
-    this.opt = $.extend(this.opt, options);
-
-
-    this.driveCar = function (car) {
-        document.write(this.name + " ведет машину " + car.name + "<br/>");
-    };
-    this.displayInfo = function () {
-        document.write("Имя: " + this.name + "; возраст: " + this.age + "<br/>");
-    };
-};
-
+﻿
 var as = as || {};
 
 as.ace = {

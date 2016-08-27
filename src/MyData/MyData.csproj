@@ -551,6 +551,7 @@
     <Content Include="JS\ace\worker-xml.js" />
     <Content Include="JS\ace\worker-xquery.js" />
     <Content Include="JS\ace\_readme.txt" />
+    <Content Include="JS\as.ace2.js" />
     <Content Include="JS\as.ace.js" />
     <Content Include="JS\as.sys2.js" />
     <Content Include="JS\as.sys.js" />
@@ -586,6 +587,7 @@
     <Content Include="Areas\Memory\Views\Lern\Index.cshtml" />
     <None Include="Properties\PublishProfiles\masterhost.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="JS\Lern\lern.word.js" />
     <Content Include="JS\Lern\lern.test.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
