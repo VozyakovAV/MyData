@@ -24,5 +24,9 @@
         });
     };
 
+    this.getEditor = function () {
+        return _editor;
+    }
+
     initEditor(el, readonly);
 };

@@ -32,7 +32,7 @@
 
 @Scripts.Render("~/bundles/ace")
 <script type="text/javascript">
-    var helper = as.ace.init({ el: "editor" });
+    var helper = new HelperAce("editor", false);
     helper.insertText($("#Question").val());
     helper.autoCopyText("#Question");
 </script>
