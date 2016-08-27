@@ -8,21 +8,21 @@ namespace Common
 {
     public static class ListExtension
     {
+        //https://habrahabr.ru/post/165459/
+        private static Random _random = new Random();
         public static T GetRandom<T>(this IEnumerable<T> list)
         {
-            var r = new Random();
-            int index = r.Next(list.Count());
+            int index = _random.Next(list.Count());
             return list.ToList()[index];
         }
 
         public static void Shuffle<T>(this IList<T> list)
         {
-            var r = new Random();
             int n = list.Count;
             while (n > 1)
             {
                 n--;
-                int k = r.Next(n + 1);
+                int k = _random.Next(n + 1);
                 T value = list[k];
                 list[k] = list[n];
                 list[n] = value;
