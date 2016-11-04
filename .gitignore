@@ -1,4 +1,5 @@
 *.user
+*.suo
 src/.vs/
 src/Common/bin/
 src/Common/obj/
